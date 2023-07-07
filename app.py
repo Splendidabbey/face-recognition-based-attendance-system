@@ -44,12 +44,13 @@ def totalreg():
 
 #### extract the face from an image
 def extract_faces(img):
-    if img!=[]:
+    if img is not None and img.size != 0:
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         face_points = face_detector.detectMultiScale(gray, 1.3, 5)
-        return face_points
-    else:
-        return []
+        if len(face_points) > 0:  # Check if any faces were detected
+            return face_points
+    return []  # Return an empty list if no faces were detected
+
 
 #### Identify face using ML model
 def identify_face(facearray):
